@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Test Cases</title>
+
+  <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+  </style>
+
+</head>
+<body>
+<h1>View Test Cases</h1>
+    <table>
+        <tr>
+            <th>Test Case ID</th>
+            <th>Description</th>
+            <th>Update</th>
+            <th>Status</th>
+            <th>Creation Date</th>
+            <th>Last Update Date</th>
+        </tr>
+        {% for test_id, test_case in test_cases.items() %}
+        <tr>
+            <td>{{ test_id }}</td>
+            <td>{{ test_case.Description }}</td>
+            <td>{{ test_case.Update }}</td>
+            <td>{{ test_case.Status }}</td>
+            <td>{{ test_case.Date }}</td>
+            <td>{{ test_case.Update_date }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

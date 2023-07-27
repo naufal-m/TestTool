@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Case Tracking System</title>
+</head>
+<body>
+<h1>Test Case Tracking System</h1>
+
+    <h2>Add Test Case</h2>
+    <form action="/add_test_case" method="post">
+        <label for="test_id">Test Case ID:</label>
+        <input type="text" name="test_id" required>
+        <br>
+        <label for="description">Description:</label>
+        <input type="text" name="description" required>
+        <br>
+        <input type="submit" value="Add Test Case">
+    </form>
+
+    <h2>Update Test Case Status</h2>
+    <form action="/update_test_case" method="post">
+        <label for="test_id">Test Case ID:</label>
+        <input type="number" name="test_id" required>
+        <br>
+        <label for="change">Update:</label>
+        <input type="text" name="change" required>
+        <br>
+        <label for="status">Status:</label>
+        <input type="text" name="status" required>
+        <br>
+        <input type="submit" value="Update Test Case Status">
+    </form>
+
+    <h2>View Test Cases</h2>
+    <form action="/view_test_cases" method="get">
+        <input type="submit" value="View Test Cases">
+    </form>
+</body>
+</html>
