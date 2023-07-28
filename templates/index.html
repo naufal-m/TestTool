@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Bugs Tracking System</title>
+    <title>Test Report</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
 </head>
 <body>
-<h1>Bugs Tracking System</h1>
+<h1>Test Report</h1>
 
     <!-- Add Bugs Popup -->
     <div id="add-bugs-popup" class="popup-container" style="display: none;">
@@ -50,6 +50,9 @@
     <form action="/view_bugs" method="get">
         <input type="submit" value="View Bugs">
     </form>
+
+    <!-- Add the download button for bug_report.xlsx -->
+    <a href="{{ url_for('download_bug_report') }}" class="download-button">Download Bug Report</a>
 
     <!-- JavaScript to handle popups -->
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>

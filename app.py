@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import pandas as pd
 import os
 import datetime
@@ -69,6 +69,12 @@ def view_bugs_route():
     bug_report = load_bug_report()
     # return view_bugs(bug_report)
     return render_template('bugs_table.html', bug_report=bug_report)
+
+@app.route('/download_bug_report')
+def download_bug_report():
+    # Ensure the 'bug_report.xlsx' file exists in the same directory as 'app.py'
+    file_path = 'bug_report.xlsx'
+    return send_file(file_path, as_attachment=True)
 
 
 if __name__ == "__main__":
