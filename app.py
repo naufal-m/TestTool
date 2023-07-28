@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file
+from flask import Flask, render_template, request, send_file, jsonify
 import pandas as pd
 import os
 import datetime
@@ -23,7 +23,7 @@ def add_bug(bug_report, bug_id, description):
         return f"Bug with ID {bug_id} already exists."
     else:
         created_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        bug_report[bug_id] = {'Description': description, 'Update': 'N/A', 'Status': 'Open', 'Date': created_date,
+        bug_report[bug_id] = {'Description': description, 'Update': description, 'Status': 'Open', 'Date': created_date,
                                'Update_date': 'N/A'}
         save_bug_report(bug_report)
         return f"Bug ID {bug_id} added successfully."
@@ -68,7 +68,7 @@ def update_bugs_route():
 def view_bugs_route():
     bug_report = load_bug_report()
     # return view_bugs(bug_report)
-    return render_template('bugs_table.html', bug_report=bug_report)
+    return render_template('view_table.html', bug_report=bug_report)
 
 @app.route('/download_bug_report')
 def download_bug_report():

@@ -32,7 +32,7 @@ body {
         }
 
         input[type="submit"] {
-            background-color: #007BFF;
+            background-color: #5D6D7E;
             color: #fff;
             padding: 10px 15px;
             border: none;
@@ -41,7 +41,7 @@ body {
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background-color: #7E8E98;
         }
 
         /* Optional: Style the headings */
@@ -69,13 +69,13 @@ body {
     margin: 0;
     padding: 0;
     font-size: 16px;
-    color: #333;
+    color: white;
 }
 
 /* Styles for the close button */
 .popup-close-button {
     cursor: pointer;
-    background-color: #f1f1f1;
+    background-color: #5D6D7E;
     padding: 8px 16px;
     border: none;
     border-radius: 4px;
@@ -83,14 +83,14 @@ body {
 }
 
 .popup-close-button:hover {
-    background-color: #ddd;
+    background-color: #7E8E98;
 }
 
 /* Styles for the download button */
 .download-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007bff;
+    background-color: #5D6D7E;
     color: #fff;
     text-decoration: none;
     border: none;
@@ -101,5 +101,5 @@ body {
 }
 
 .download-button:hover {
-    background-color: #0056b3;
+    background-color: #7E8E98;
 }
