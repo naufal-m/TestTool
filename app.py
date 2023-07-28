@@ -5,70 +5,71 @@ import datetime
 
 app = Flask(__name__)
 
-TEST_CASES_FILES = 'test_cases.xlsx'
+BUG_REPORT_FILES = 'bug_report.xlsx'
 
-def load_test_cases():
-    if os.path.exists(TEST_CASES_FILES):
-        return pd.read_excel(TEST_CASES_FILES, index_col=0).to_dict(orient='index')
+def load_bug_report():
+    if os.path.exists(BUG_REPORT_FILES):
+        return pd.read_excel(BUG_REPORT_FILES, index_col=0).to_dict(orient='index')
     else:
         return {}
 
-def save_test_cases(test_cases):
-    df = pd.DataFrame.from_dict(test_cases, orient='index')
-    df.index.name = 'Test ID'
-    df.to_excel(TEST_CASES_FILES)
+def save_bug_report(bug_reports):
+    df = pd.DataFrame.from_dict(bug_reports, orient='index')
+    df.index.name = 'Bug ID'
+    df.to_excel(BUG_REPORT_FILES)
 
-def add_test_case(test_cases, test_id, description):
-    if test_id in test_cases:
-        return f"Test case with ID {test_id} already exists."
+def add_bug(bug_report, bug_id, description):
+    if bug_id in bug_report:
+        return f"Bug with ID {bug_id} already exists."
     else:
         created_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        test_cases[test_id] = {'Description': description, 'Update': 'N/A', 'Status': 'Open', 'Date': created_date,
+        bug_report[bug_id] = {'Description': description, 'Update': 'N/A', 'Status': 'Open', 'Date': created_date,
                                'Update_date': 'N/A'}
-        save_test_cases(test_cases)
-        return f"Test case {test_id} added successfully."
+        save_bug_report(bug_report)
+        return f"Bug ID {bug_id} added successfully."
 
-def update_test_case_status(test_cases, test_id, update, status):
-    if test_id not in test_cases:
-        return f"Test case with ID {test_id} does not exist."
+def update_bug_status(bug_report, bug_id, update, status):
+    if bug_id not in bug_report:
+        return f"Bug with ID {bug_id} does not exist."
     else:
         update_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-        test_cases[test_id]['Update'] = update
-        test_cases[test_id]['Status'] = status
-        test_cases[test_id]['Update_date'] = update_date
-        save_test_cases(test_cases)
-        return f"Status of test case {test_id} changed to '{update}' and updated to '{status}' on {update_date}."
+        bug_report[bug_id]['Update'] = update
+        bug_report[bug_id]['Status'] = status
+        bug_report[bug_id]['Update_date'] = update_date
+        save_bug_report(bug_report)
+        return f"Status of bug ID {bug_id} changed to '{update}' and updated to '{status}' on {update_date}."
 
-def view_test_cases(test_cases):
-    return test_cases
+def view_bugs(bug_report):
+    return bug_report
 
 @app.route('/', methods=['GET'])
 def index():
     return render_template('index.html')
 
-@app.route('/add_test_case', methods=['POST'])
-def add_test_case_route():
-    test_cases = load_test_cases()
-    test_id = request.form['test_id']
+@app.route('/add_bugs', methods=['POST'])
+def add_bugs_route():
+    bug_report = load_bug_report()
+    bug_id = request.form['bug_id']
     description = request.form['description']
-    message = add_test_case(test_cases, test_id, description)
+    message = add_bug(bug_report, bug_id, description)
     return message
 
-@app.route('/update_test_case', methods=['POST'])
-def update_test_case_route():
-    test_cases = load_test_cases()
-    test_id = int(request.form['test_id'])
+@app.route('/update_bugs', methods=['POST'])
+def update_bugs_route():
+    bug_report = load_bug_report()
+    bug_id = int(request.form['bug_id'])
     change = request.form['change']
     status = request.form['status']
 
-    message = update_test_case_status(test_cases, test_id, change, status)
+    message = update_bug_status(bug_report, bug_id, change, status)
     return message
 
-@app.route('/view_test_cases', methods=['GET'])
-def view_test_cases_route():
-    test_cases = load_test_cases()
-    # return view_test_cases(test_cases)
-    return render_template('test_cases_table.html', test_cases=test_cases)
+@app.route('/view_bugs', methods=['GET'])
+def view_bugs_route():
+    bug_report = load_bug_report()
+    # return view_bugs(bug_report)
+    return render_template('bugs_table.html', bug_report=bug_report)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

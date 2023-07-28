@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>View Test Cases</title>
+    <title>View Bugs</title>
 
   <style>
         table {
@@ -27,24 +27,24 @@
 
 </head>
 <body>
-<h1>View Test Cases</h1>
+<h1>View Bugs</h1>
     <table>
         <tr>
-            <th>Test Case ID</th>
+            <th>Bug ID</th>
             <th>Description</th>
             <th>Update</th>
             <th>Status</th>
-            <th>Creation Date</th>
-            <th>Last Update Date</th>
+            <th>Create Date</th>
+            <th>Update Date</th>
         </tr>
-        {% for test_id, test_case in test_cases.items() %}
+        {% for bug_id, bug_report in bug_report.items() %}
         <tr>
-            <td>{{ test_id }}</td>
-            <td>{{ test_case.Description }}</td>
-            <td>{{ test_case.Update }}</td>
-            <td>{{ test_case.Status }}</td>
-            <td>{{ test_case.Date }}</td>
-            <td>{{ test_case.Update_date }}</td>
+            <td>{{ bug_id }}</td>
+            <td>{{ bug_report.Description }}</td>
+            <td>{{ bug_report.Update }}</td>
+            <td>{{ bug_report.Status }}</td>
+            <td>{{ bug_report.Date }}</td>
+            <td>{{ bug_report.Update_date }}</td>
         </tr>
         {% endfor %}
     </table>

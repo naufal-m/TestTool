@@ -2,39 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test Case Tracking System</title>
+    <title>Bugs Tracking System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
 </head>
 <body>
-<h1>Test Case Tracking System</h1>
+<h1>Bugs Tracking System</h1>
 
-    <h2>Add Test Case</h2>
-    <form action="/add_test_case" method="post">
-        <label for="test_id">Test Case ID:</label>
-        <input type="text" name="test_id" required>
+    <!-- Add Bugs Popup -->
+    <div id="add-bugs-popup" class="popup-container" style="display: none;">
+        <p id="add-bugs-popup-message" class="popup-message"></p>
+        <button onclick="hideAddBugsPopup()" class="popup-close-button">Close</button>
+    </div>
+
+    <h2>Add Bugs</h2>
+    <form action="/add_bugs" method="post" onsubmit="return addBugsFormSubmit()">
+        <label for="bug_id">Bug ID:</label>
+        <input type="text" name="bug_id" required>
         <br>
         <label for="description">Description:</label>
         <input type="text" name="description" required>
         <br>
-        <input type="submit" value="Add Test Case">
+        <input type="submit" value="Add Bugs">
     </form>
 
-    <h2>Update Test Case Status</h2>
-    <form action="/update_test_case" method="post">
-        <label for="test_id">Test Case ID:</label>
-        <input type="number" name="test_id" required>
+    <!-- Update Bugs Status Popup -->
+    <div id="update-bugs-popup" class="popup-container" style="display: none;">
+        <p id="update-bugs-popup-message" class="popup-message"></p>
+        <button onclick="hideUpdateBugsPopup()" class="popup-close-button">Close</button>
+    </div>
+
+    <h2>Update Bugs Status</h2>
+    <form action="/update_bugs" method="post" onsubmit="return updateBugsFormSubmit()">
+        <label for="bug_id">Bug ID:</label>
+        <input type="number" id="bug_id" name="bug_id" required>
         <br>
         <label for="change">Update:</label>
-        <input type="text" name="change" required>
+        <input type="text" id="change" name="change" required>
         <br>
         <label for="status">Status:</label>
-        <input type="text" name="status" required>
+        <input type="text" id="status" name="status" required>
         <br>
-        <input type="submit" value="Update Test Case Status">
+        <input type="submit" value="Update Bug Status">
     </form>
 
-    <h2>View Test Cases</h2>
-    <form action="/view_test_cases" method="get">
-        <input type="submit" value="View Test Cases">
+    <h2>View Bugs</h2>
+    <form action="/view_bugs" method="get">
+        <input type="submit" value="View Bugs">
     </form>
+
+    <!-- JavaScript to handle popups -->
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+
 </body>
 </html>
