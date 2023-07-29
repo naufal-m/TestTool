@@ -72,19 +72,21 @@ body {
 /* Styles for the popup message */
 .popup-message {
     margin: 0;
-    padding: 0;
+    padding 0px;
     font-size: 16px;
-    color: white;
+    color: #333333;
+    padding-bottom: 8px;
 }
 
 /* Styles for the close button */
 .popup-close-button {
     cursor: pointer;
     background-color: #5D6D7E;
-    padding: 8px 16px;
+    padding: 8px 16px 6px;
     border: none;
     border-radius: 4px;
     font-size: 14px;
+    color: #fff;
 }
 
 .popup-close-button:hover {
@@ -107,4 +109,17 @@ body {
 
 .download-button:hover {
     background-color: #7E8E98;
+}
+
+.send-mail{
+    display: inline-block;
+    padding: 10px 10px;
+    background-color: #5D6D7E;
+    color: #fff;
+    text-decoration: none;
+    border: none;
+    border-radius: 6px;
+    font-size: 13px;
+    cursor: pointer;
+    margin: 10px;
 }

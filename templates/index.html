@@ -54,8 +54,11 @@
     <!-- Add the download button for bug_report.xlsx -->
     <a href="{{ url_for('download_bug_report') }}" class="download-button">Download Bug Report</a>
 
+    <button onclick="sendBugReport()" class="send-mail">Send Bug Report Email</button>
+
     <!-- JavaScript to handle popups -->
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+    <script src="{{ url_for('static', filename='sendmail.js') }}"></script>
 
 </body>
 </html>

@@ -3,9 +3,22 @@ import pandas as pd
 import os
 import datetime
 
+from send_mail import configure_mail, send_bug_report_email  # Import the email functions
+
+
 app = Flask(__name__)
 
 BUG_REPORT_FILES = 'bug_report.xlsx'
+
+# Configure Flask-Mail settings
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'your_email@example.com'  # Replace with your email
+app.config['MAIL_PASSWORD'] = 'your_email_password'     # Replace with your email password
+
+# Create a Mail instance by calling the configure_mail function from email_utils
+mail = configure_mail(app)
 
 def load_bug_report():
     if os.path.exists(BUG_REPORT_FILES):
@@ -76,6 +89,22 @@ def download_bug_report():
     file_path = 'bug_report.xlsx'
     return send_file(file_path, as_attachment=True)
 
+
+@app.route('/send_email', methods=['GET'])
+def send_email():
+    # Ensure the 'bug_report.xlsx' file exists in the same directory as 'app.py'
+    file_path = 'bug_report.xlsx'
+
+    # Define the sender and recipient email addresses
+    sender_email = app.config['MAIL_USERNAME']
+    recipients = ['recipient@example.com']  # Replace with the recipient's email address
+
+    try:
+        # Send the email
+        send_bug_report_email(mail, sender_email, recipients, file_path)
+        return "Bug report email sent successfully!"
+    except Exception as e:
+        return f"An error occurred while sending the email: {str(e)}"
 
 if __name__ == "__main__":
     app.run(debug=True)
