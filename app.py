@@ -37,7 +37,7 @@ def add_bug(bug_report, bug_id, description):
     else:
         created_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         bug_report[bug_id] = {'Description': description, 'Update': description, 'Status': 'Open', 'Date': created_date,
-                               'Update_date': 'N/A'}
+                               'Update_date': created_date }
         save_bug_report(bug_report)
         return f"Bug ID {bug_id} added successfully."
 
@@ -47,10 +47,10 @@ def update_bug_status(bug_report, bug_id, update, status):
     else:
         update_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         bug_report[bug_id]['Update'] = update
-        bug_report[bug_id]['Status'] = status
+        bug_report[bug_id]['Status'] = status.strip()
         bug_report[bug_id]['Update_date'] = update_date
         save_bug_report(bug_report)
-        return f"Status of bug ID {bug_id} changed to '{update}' and updated to '{status}' on {update_date}."
+        return f"Successfully updated bug ID {bug_id} and status changed to '{status}'."
 
 def view_bugs(bug_report):
     return bug_report
@@ -72,7 +72,7 @@ def update_bugs_route():
     bug_report = load_bug_report()
     bug_id = int(request.form['bug_id'])
     change = request.form['change']
-    status = request.form['status']
+    status = request.form['status'].strip()
 
     message = update_bug_status(bug_report, bug_id, change, status)
     return message
@@ -89,6 +89,14 @@ def download_bug_report():
     file_path = 'bug_report.xlsx'
     return send_file(file_path, as_attachment=True)
 
+@app.route('/get_bug_details')
+def get_bug_details():
+    bug_report = load_bug_report()
+    bug_id = int(request.args.get('bug_id'))
+    if bug_id in bug_report:
+        return jsonify(bug_report[bug_id])
+    else:
+        return jsonify({'error': 'Bug with the provided ID does not exist.'})
 
 @app.route('/send_email', methods=['GET'])
 def send_email():

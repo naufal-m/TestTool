@@ -7,11 +7,19 @@
         // Clear the input fields after submission
         document.getElementsByName('bug_id')[0].value = '';
         document.getElementsByName('description')[0].value = '';
+
+        // Disable the Add Bugs form elements while the popup is displayed
+        document.getElementsByName('bug_id')[0].disabled = true;
+        document.getElementsByName('description')[0].disabled = true;
     }
 
     function hideAddBugsPopup() {
         const popup = document.getElementById("add-bugs-popup");
         popup.style.display = "none";
+
+        // Enable the Add Bugs form elements after the popup is closed
+        document.getElementsByName('bug_id')[0].disabled = false;
+        document.getElementsByName('description')[0].disabled = false;
     }
 
     function showUpdateBugsPopup(message) {
@@ -22,13 +30,20 @@
 
         // Clear the input fields after submission
         document.getElementById('bug_id').value = '';
+        document.getElementById('description').value = '';
         document.getElementById('change').value = '';
         document.getElementById('status').value = '';
+
+        // Disable the form elements
+        disableFormElements();
     }
 
     function hideUpdateBugsPopup() {
         const popup = document.getElementById("update-bugs-popup");
         popup.style.display = "none";
+
+        // Enable the form elements after the Update Bugs popup is closed
+        enableFormElements();
     }
 
     function addBugsFormSubmit() {
@@ -67,9 +82,28 @@
                 showUpdateBugsPopup(message);
                 // Clear the input fields after successful submission
                 document.getElementById('bug_id').value = '';
+                document.getElementById('description').value = '';
                 document.getElementById('change').value = '';
                 document.getElementById('status').value = '';
                 })
           .catch(error => console.error('Error:', error));
         return false; // Prevent form submission
     }
+
+    function disableFormElements() {
+        document.getElementById('bug_id').disabled = true;
+        document.getElementById('description').disabled = true;
+        document.getElementById('change').disabled = true;
+        document.getElementById('status').disabled = true;
+        document.getElementById('updateButton').disabled = true;
+    }
+
+
+    function enableFormElements() {
+        document.getElementById('bug_id').disabled = false;
+        document.getElementById('description').disabled = false;
+        document.getElementById('change').disabled = false;
+        document.getElementById('status').disabled = false;
+        document.getElementById('updateButton').disabled = false;
+    }
+

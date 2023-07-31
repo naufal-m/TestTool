@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Test Report</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dropdown.css') }}">
 
 </head>
 <body>
@@ -37,12 +38,21 @@
         <label for="bug_id">Bug ID:</label>
         <input type="number" id="bug_id" name="bug_id" required>
         <br>
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" disabled>
+        <br>
         <label for="change">Update:</label>
         <input type="text" id="change" name="change" required>
         <br>
-        <label for="status">Status:</label>
-        <input type="text" id="status" name="status" required>
+        <div id="statusContainer" style="display: none;">
+            <label for="status">Status:</label>
+            <select id="status" name="status" required>
+                <option value="Open">Open</option>
+                <option value="In Progress">In progress</option>
+                <option value="Closed">Closed</option>
+            </select>
         <br>
+        </div>
         <input type="submit" value="Update Bug Status">
     </form>
 
@@ -56,9 +66,10 @@
 
     <button onclick="sendBugReport()" class="send-mail">Send Bug Report Email</button>
 
-    <!-- JavaScript to handle popups -->
+    <!-- Java scripts calls -->
     <script src="{{ url_for('static', filename='scripts.js') }}"></script>
     <script src="{{ url_for('static', filename='sendmail.js') }}"></script>
+    <script src="{{ url_for('static', filename='autopopulate.js') }}"></script>
 
 </body>
 </html>
